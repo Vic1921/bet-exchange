@@ -2,12 +2,15 @@ package ro.vic.bet_exchange.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bets")
-@Data
+@NoArgsConstructor
 public class Bet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +23,43 @@ public class Bet {
     private String status; // e.g., PENDING, WIN, LOSS
     private LocalDateTime betTime;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+
+    public double getStake() {
+        return stake;
+    }
+
+    public void setStake(double stake) {
+        this.stake = stake;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getBetTime() {
+        return betTime;
+    }
+
+    public void setBetTime(LocalDateTime betTime) {
+        this.betTime = betTime;
+    }
 }
