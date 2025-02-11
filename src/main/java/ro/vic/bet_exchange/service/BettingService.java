@@ -23,7 +23,7 @@ public class BettingService {
     @Autowired
     private BankrollRepository bankrollRepository;
 
-    @Autowired
+    @Autowired(required = false)
     private BetPlacer betPlacer;
 
     @Autowired
