@@ -57,7 +57,7 @@ public class BettingController {
         return ResponseEntity.ok("Bet result processed.");
     }
 
-    // Additional endpoints expose current bankroll, bet history for visualization in the frontend purpose.
+    // Additional endpoints expose current bankroll, bet history for visualization in FE.
 
     // Endpoint to get the current bankroll balance
     @GetMapping("/bankroll")

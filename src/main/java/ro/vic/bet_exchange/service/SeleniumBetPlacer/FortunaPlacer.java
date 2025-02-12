@@ -1,8 +1,9 @@
-package ro.vic.bet_exchange.service;
+package ro.vic.bet_exchange.service.SeleniumBetPlacer;
 
 import ro.vic.bet_exchange.model.Match;
+import ro.vic.bet_exchange.service.BetPlacer;
 
-public class SeleniumBetPlacer implements BetPlacer {
+public class FortunaPlacer implements BetPlacer {
     @Override
     public boolean placeBet(Match match, double stake) {
         // Use Selenium WebDriver to navigate and place the bet.

@@ -20,8 +20,18 @@ public class Bet {
     private Match match;
 
     private double stake;
+    private double odds;
     private String status; // e.g., PENDING, WIN, LOSS
     private LocalDateTime betTime;
+
+
+    public double getOdds() {
+        return odds;
+    }
+
+    public void setOdds(double odds) {
+        this.odds = odds;
+    }
 
     public Long getId() {
         return id;

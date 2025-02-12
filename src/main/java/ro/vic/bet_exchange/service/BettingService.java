@@ -33,7 +33,7 @@ public class BettingService {
     private String notificationEmail;
 
     private int currentLossStreak = 0;
-    private final double initialStake = 10.0;
+    private final double initialStake = 10.0; // 10 RON initial stake = 2 EUR
 
     public void startBettingRound(Match match) {
         double stake = MartingaleCalculator.calculateNextStake(initialStake, currentLossStreak);
@@ -46,9 +46,16 @@ public class BettingService {
 
         boolean betPlaced = betPlacer.placeBet(match, stake);
 
+        if (!betPlaced) {
+            // TODO: Handle retries or other strategies | First try thru Betfair API if failed try thru Selenium
+            sendProblemNotification();
+            throw new IllegalStateException("Failed to place the bet!");
+        }
+
         Bet bet = new Bet();
         bet.setMatch(match);
         bet.setStake(stake);
+        bet.setOdds(match.getDrawOdds());
         bet.setBetTime(LocalDateTime.now());
         bet.setStatus("PENDING");
         betRepository.save(bet);
@@ -66,9 +73,17 @@ public class BettingService {
         mailSender.send(message);
     }
 
+    void sendProblemNotification() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(notificationEmail);
+        message.setSubject("Placing bet failed");
+        message.setText("Something went wrong when placing the bet.");
+        mailSender.send(message);
+    }
+
     public void processBetResult(Bet bet, boolean isWin) {
         if (isWin) {
-            double winnings = bet.getStake() * 3.0;
+            double winnings = bet.getStake() * bet.getOdds();
             Bankroll bankroll = bankrollRepository.findById(1L).get();
             bankroll.setBalance(bankroll.getBalance() + winnings);
             bankroll.setUpdatedOn(LocalDateTime.now());
