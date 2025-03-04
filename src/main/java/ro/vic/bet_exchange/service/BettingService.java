@@ -69,7 +69,9 @@ public class BettingService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(notificationEmail);
         message.setSubject("Insufficient Bankroll Notification");
-        message.setText("Your bankroll is insufficient to place the next bet.");
+        //TODO: Append match information and method of failing to the message
+
+        message.setText("Your bankroll is insufficient to place the next bet.\n ");
         mailSender.send(message);
     }
 
@@ -77,6 +79,8 @@ public class BettingService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(notificationEmail);
         message.setSubject("Placing bet failed");
+        //TODO: Append match information and method of failing to the message
+
         message.setText("Something went wrong when placing the bet.");
         mailSender.send(message);
     }

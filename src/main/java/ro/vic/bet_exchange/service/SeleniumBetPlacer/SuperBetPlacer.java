@@ -2,6 +2,8 @@ package ro.vic.bet_exchange.service.SeleniumBetPlacer;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.annotation.PreDestroy;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +23,8 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Getter
+@Setter
 @Slf4j
 public class SuperBetPlacer implements BetPlacer {
 
@@ -122,7 +126,6 @@ public class SuperBetPlacer implements BetPlacer {
             logger.info("Clicked on login submit button.");
 
             /*
-
             // Enter username and password
             WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div[1]/form/div[1]/div")));
             WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[1]/div/div[2]/div[1]/form/div[2]/div/input")));
@@ -135,23 +138,17 @@ public class SuperBetPlacer implements BetPlacer {
             loggedIn = true;
             return true;
         } catch (Exception e) {
-            //log.error("Login failed", e);
+            logger.error("Login failed", e);
             return false;
         }
-    }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
     }
 
     @Override
     public boolean placeBet(Match match, double stake) {
         // Use Selenium WebDriver to navigate and place the bet.
         // Handle delays, element locators, and exceptions.
+
+        // URL for getting a List of the matches -> https://superbet.ro/pariuri-sportive/fotbal/romania/superliga/toate
         return true;
     }
 }
